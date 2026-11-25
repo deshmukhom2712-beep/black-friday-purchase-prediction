@@ -21,10 +21,23 @@ Stay_In_Current_City_Years, Marital_Status, Product_Category_1/2/3, Purchase
     python run.py --fast     # real data, no tuning, quick
     python run.py            # real data, full run (CV + XGBoost tuning, ~15-30 min)
 
-## 4. Outputs (in `outputs/`)
-- model_comparison.csv  -> results table for the report/PPT
-- 00_purchase_distribution.png, 01_rmse_comparison.png, 02_r2_comparison.png,
-  03_actual_vs_predicted.png, 04_feature_importance.png -> screenshots/charts
-- best_xgb_params.json  -> tuned hyperparameters
+## 4. Results
 
+| Model | Test RMSE | Test MAE | Test R² |
+|---|---|---|---|
+| **XGBoost (Tuned)** | 2,581 | 1,916 | **0.7348** |
+| XGBoost | 2,595 | 1,926 | 0.7320 |
+| LightGBM | 2,599 | 1,933 | 0.7311 |
+| Random Forest | 2,735 | 2,035 | 0.7022 |
+| Gradient Boosting | 2,748 | 2,041 | 0.6995 |
+| Decision Tree | 2,799 | 2,079 | 0.6882 |
+| Linear / Ridge | 4,500 | 3,452 | 0.1942 |
+
+![Purchase distribution](outputs/00_purchase_distribution.png)
+![RMSE comparison](outputs/01_rmse_comparison.png)
+![R2 comparison](outputs/02_r2_comparison.png)
+![Actual vs predicted](outputs/03_actual_vs_predicted.png)
+![Feature importance](outputs/04_feature_importance.png)
+
+Full table: `outputs/model_comparison.csv`. Tuned parameters: `outputs/best_xgb_params.json`.
 Note: `--demo` data is synthetic and only checks that the code works. Report only results from the real dataset.
