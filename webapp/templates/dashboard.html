@@ -1,0 +1,14 @@
+{% extends "layout_app.html" %}{% block title %}Dashboard · SpendSense AI{% endblock %}{% block content %}
+<div class="pagehead"><div><div class="eyebrow">YOUR WORKSPACE</div><h1>Good to see you, {{ g.user['name'] }}.</h1><p class="muted">Ready to estimate a purchase?</p></div>
+ <a class="btn" href="{{ url_for('predict') }}">+ New prediction</a></div>
+<div class="grid2"><div class="banner"><div><div class="eyebrow" style="color:#cfe8dd">AI PURCHASE ASSISTANT</div>
+ <h2>Understand spending. <span>Predict with confidence.</span></h2><p>Enter a customer profile and a product category to get an estimated purchase amount.</p>
+ <a class="btn white sm" style="margin-top:1rem" href="{{ url_for('predict') }}">Start prediction →</a></div><div class="big">🛍️</div></div>
+ <div class="card stat"><div class="eyebrow">PREDICTIONS</div><b>{{ stats.count }}</b><small>Your activity</small>
+  {% if stats.count %}<hr style="border:0;border-top:1px solid var(--line);margin:.9rem 0"><small>Average</small><b style="font-size:1.3rem">{{ stats.avg|inr }}</b>{% endif %}</div></div>
+<div class="card" style="margin-top:1rem"><div class="pagehead" style="margin-bottom:.6rem"><h3>Recent predictions</h3><a class="muted" href="{{ url_for('history') }}">View all →</a></div>
+ {% if recent %}<div class="scroll"><table><tr><th>Date</th><th>Customer</th><th>Product</th><th>Amount</th></tr>
+ {% for x in recent %}<tr><td>{{ x.r['created_at']|when }}</td><td>{{ 'Male' if x.i.gender=='M' else 'Female' }}, {{ x.i.age }}</td><td>Cat {{ x.i.cat1 }}</td>
+ <td><a href="{{ url_for('result', pid=x.r['id']) }}"><b>{{ x.r['amount']|inr }}</b></a></td></tr>{% endfor %}</table></div>
+ {% else %}<div class="empty">No predictions yet. Start your first one above.</div>{% endif %}</div>
+{% endblock %}

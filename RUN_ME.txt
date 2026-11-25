@@ -1,0 +1,27 @@
+PURCHASE AMOUNT PREDICTION - MASTER PROJECT (analysis + web app)
+
+STEP 1  Extract this zip. Open the extracted "purchase_prediction" folder.
+STEP 2  Put train.csv inside the "data" folder.
+        (If you ran the project before, also copy your old "outputs" folder here
+         to keep your results, so no need to re-run the slow step.)
+STEP 3  Open a terminal in this folder (type cmd in the address bar, press Enter) and run:
+
+        python -m pip install -r requirements.txt
+        python src/train_model.py
+        python -m streamlit run app.py
+
+STEP 4  Only if you do NOT have an "outputs" folder yet (needed for the Model comparison tab):
+        python run.py --fast      (about 10 min, skips tuning)
+        or python run.py          (full run, about 25 min)
+
+If "python" is not recognised, use "py" instead of "python".
+See README.md for the analysis and WEBAPP.md for putting the app online.
+
+==== NEW: FULL WEB APP (landing page, register / sign in, dashboard, history) ====
+After STEP 3 (python src/train_model.py) run:
+
+        python webapp/app.py
+
+Open http://127.0.0.1:5000 in Chrome. Create an account, then use "New Prediction".
+Copy your old "outputs" folder into the project to fill the "Model Results" page.
+(The older Streamlit version still works:  python -m streamlit run app.py)

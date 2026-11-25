@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="shell">
+ <aside class="sidebar">
+  <a class="brand" href="{{ url_for('dashboard') }}"><i>✦</i>SpendSense <span>AI</span></a>
+  <div class="label">WORKSPACE</div>
+  <a class="link {{ 'on' if active=='dashboard' }}" href="{{ url_for('dashboard') }}">Dashboard</a>
+  <a class="link {{ 'on' if active=='predict' }}" href="{{ url_for('predict') }}">New Prediction</a>
+  <a class="link {{ 'on' if active=='history' }}" href="{{ url_for('history') }}">My History</a>
+  <a class="link {{ 'on' if active=='models' }}" href="{{ url_for('models_page') }}">Model Results</a>
+  <form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><button class="btn ghost sm">Sign out</button></form>
+ </aside>
+ <main class="main">
+  <div class="topbar"><div class="chip"><i>{{ g.user['name'][0]|upper }}</i>{{ g.user['name'] }}</div></div>
+  {% block content %}{% endblock %}
+ </main>
+</div>
+{% endblock %}

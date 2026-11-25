@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Sign in · SpendSense AI{% endblock %}{% block body %}
+<div class="auth"><div class="side"><a class="brand" href="/"><i style="background:#fff;color:var(--pri)">✦</i>SpendSense AI</a>
+ <h2>“Welcome back. Your predictions are waiting.”</h2><div class="spark">✦</div></div>
+ <div class="panel"><form method="post" novalidate><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+  <div class="eyebrow">WELCOME BACK</div><h1>Sign in</h1><p class="muted">Continue to your workspace.</p>
+  <label class="f" for="email">Email address</label><input id="email" name="email" type="email" value="{{ email }}" placeholder="you@example.com" required autocomplete="email">
+  <label class="f" for="pw">Password</label><input id="pw" name="password" type="password" placeholder="Your password" required autocomplete="current-password">
+  <button class="btn" type="submit">Sign in →</button>
+  <div class="alt">New here? <a href="{{ url_for('register') }}">Create an account</a></div></form></div></div>
+{% endblock %}

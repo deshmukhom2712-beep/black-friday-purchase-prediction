@@ -1,0 +1,22 @@
+{% extends "layout_app.html" %}{% block title %}New prediction · SpendSense AI{% endblock %}{% block content %}
+<div class="pagehead"><div><div class="eyebrow">AI PURCHASE ESTIMATE</div><h1>Who is the customer?</h1><p class="muted">Tell us about the customer and product. We'll estimate the purchase amount.</p></div></div>
+{% if not model_ready %}<div class="notice">Model not found. Run <b>python src/train_model.py</b> once, then restart the app.</div>{% endif %}
+<form class="card form" method="post" action="{{ url_for('predict') }}"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+ <h3>Gender</h3><div class="opts" style="max-width:300px">
+  <label class="opt"><input type="radio" name="gender" value="M" required checked><span>Male</span></label>
+  <label class="opt"><input type="radio" name="gender" value="F"><span>Female</span></label></div>
+ <h3>Marital status</h3><div class="opts" style="max-width:300px">
+  <label class="opt"><input type="radio" name="marital" value="0" required checked><span>Unmarried</span></label>
+  <label class="opt"><input type="radio" name="marital" value="1"><span>Married</span></label></div>
+ <h3>City category</h3><div class="opts" style="max-width:420px">
+  {% for c in ['A','B','C'] %}<label class="opt"><input type="radio" name="city" value="{{ c }}" required {{ 'checked' if c=='B' }}><span>City {{ c }}</span></label>{% endfor %}</div>
+ <h3 style="margin-bottom:.6rem">Details</h3><div class="formgrid">
+  <div><label class="f" for="age" style="margin-top:0">Age group</label><select id="age" name="age">{% for a in ages %}<option {{ 'selected' if a=='26-35' }}>{{ a }}</option>{% endfor %}</select></div>
+  <div><label class="f" for="stay" style="margin-top:0">Years in current city</label><select id="stay" name="stay">{% for s in [0,1,2,3,4] %}<option value="{{ s }}" {{ 'selected' if s==1 }}>{{ s if s<4 else '4+' }}</option>{% endfor %}</select></div>
+  <div><label class="f" for="occ" style="margin-top:0">Occupation code (0-20)</label><input id="occ" name="occupation" type="number" min="0" max="20" value="4" required></div></div>
+ <h3 style="margin-bottom:.6rem">Product</h3><div class="formgrid">
+  <div><label class="f" for="c1" style="margin-top:0">Product category 1 (1-18)</label><input id="c1" name="cat1" type="number" min="1" max="18" value="5" required></div>
+  <div><label class="f" for="c2" style="margin-top:0">Category 2 (0 = none)</label><input id="c2" name="cat2" type="number" min="0" max="18" value="0" required></div>
+  <div><label class="f" for="c3" style="margin-top:0">Category 3 (0 = none)</label><input id="c3" name="cat3" type="number" min="0" max="18" value="0" required></div></div>
+ <button class="btn lg" style="margin-top:1.6rem" {{ 'disabled' if not model_ready }}>Predict purchase amount →</button></form>
+{% endblock %}

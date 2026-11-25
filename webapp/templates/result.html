@@ -1,0 +1,10 @@
+{% extends "layout_app.html" %}{% block title %}Prediction · SpendSense AI{% endblock %}{% block content %}
+<div class="pagehead"><div><div class="eyebrow">RESULT</div><h1>Your prediction</h1></div></div>
+<div class="card resultcard"><div class="muted">Estimated purchase amount</div><div class="amount">{{ r['amount']|inr }}</div>
+ <p class="muted">Expected range: <b>{{ low|inr }}</b> to <b>{{ high|inr }}</b><br><small>Based on the model's typical error of about ±{{ mae|inr }}.</small></p>
+ <div style="margin-top:1.2rem;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap"><a class="btn" href="{{ url_for('predict') }}">New prediction</a><a class="btn ghost" href="{{ url_for('history') }}">View history</a></div></div>
+<div class="card" style="margin-top:1rem"><h3 style="margin-bottom:.8rem">Inputs used</h3><div class="grid3">
+ <div><small class="muted">Customer</small><br><b>{{ 'Male' if i.gender=='M' else 'Female' }}, {{ i.age }}, {{ 'Married' if i.marital else 'Unmarried' }}</b></div>
+ <div><small class="muted">Location</small><br><b>City {{ i.city }}, {{ i.stay if i.stay<4 else '4+' }} yrs</b></div>
+ <div><small class="muted">Product</small><br><b>Cat {{ i.cat1 }}{% if i.cat2 %} / {{ i.cat2 }}{% endif %}{% if i.cat3 %} / {{ i.cat3 }}{% endif %}</b></div></div></div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "layout_app.html" %}{% block title %}Model results · SpendSense AI{% endblock %}{% block content %}
+<div class="pagehead"><div><div class="eyebrow">COMPARATIVE ANALYSIS</div><h1>Model results</h1><p class="muted">How the algorithms compared on the held-out test data.</p></div></div>
+{% if table %}<div class="card scroll"><table><tr>{% for h in table[0].keys() %}<th>{{ h }}</th>{% endfor %}</tr>
+ {% for row in table %}<tr>{% for v in row.values() %}<td>{% if loop.first %}<b>{{ v }}</b>{% else %}{{ v }}{% endif %}</td>{% endfor %}</tr>{% endfor %}</table></div>
+ <div class="imgs">{% for f in imgs %}<img src="{{ url_for('output_file', name=f) }}" alt="{{ f }}">{% endfor %}</div>
+{% else %}<div class="card empty">No results found. Copy your <b>outputs</b> folder into the project, or run <b>python run.py</b>.</div>{% endif %}
+{% endblock %}

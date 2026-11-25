@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block body %}
+<header class="nav"><a class="brand" href="/"><i>✦</i>SpendSense <span>AI</span></a>
+ <nav><a class="hide-sm" href="/">Home</a><a class="hide-sm" href="#about">About</a>
+ {% if g.user %}<a class="btn sm" href="{{ url_for('dashboard') }}">Dashboard</a>{% else %}<a class="btn sm" href="{{ url_for('login') }}">Sign in</a>{% endif %}</nav></header>
+<section class="hero"><div>
+ <div class="eyebrow">✦ AI-powered retail insight</div>
+ <h1>Predict better.<br><em>Plan smarter.</em></h1>
+ <p>A smarter way to estimate how much a customer will spend, based on their profile and the product they pick. Powered by a tuned XGBoost model trained on 550,000+ retail purchases.</p>
+ <div class="cta"><a class="btn lg" href="{{ url_for('predict') }}">Start a prediction →</a><a class="btn ghost lg" href="#about">How it works ↗</a></div></div>
+ <div class="hero-art">🛍️<div class="float a">AI Prediction<small>Ready when you are</small></div><div class="float b">R² 0.73<small>Tested on real data</small></div></div></section>
+<section class="section" id="about"><div class="eyebrow">How it works</div><h2 style="margin-top:.4rem">Three simple steps</h2>
+ <div class="steps"><div class="step"><b>1</b><h3>Describe the customer</h3><p class="muted">Gender, age group, occupation, city type and years in the city.</p></div>
+ <div class="step"><b>2</b><h3>Pick the product</h3><p class="muted">Choose the product categories the customer is buying from.</p></div>
+ <div class="step"><b>3</b><h3>Get the estimate</h3><p class="muted">See the predicted purchase amount with an expected range, saved to your history.</p></div></div></section>
+<footer class="pub">Comparative analysis of predictive learning algorithms for consumer purchase amount prediction.</footer>
+{% endblock %}

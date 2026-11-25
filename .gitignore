@@ -1,0 +1,5 @@
+data/*.csv
+webapp/instance/
+__pycache__/
+*.pyc
+venv/
